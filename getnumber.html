@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ko">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta charset="utf-8">
+	<title>Get Number</title>
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+	<style>
+	bbody, html {
+  height: 100%;
+}
+body {
+  margin-top: 150px;
+  text-align: center;
+  display: flex;
+  background: #FFDC52;
+}
+.button {
+  background: #eb1f48;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  font-family: Roboto;
+  font-size: 1.9em;
+  height: 65px;
+  letter-spacing: 0.2px;
+  line-height: 65px;
+  text-align: center;
+  text-transform: uppercase;
+  user-select: none;
+  width: 150px;
+}
+.button:hover {
+  background: #ec3257;
+}
+.button:active {
+  box-shadow: inset 0px 2px 8px -1px #d7143b;
+}
+.fancy-button {
+  margin: auto;
+  position: relative;
+}
+.frills, .frills:after, .frills:before {
+  position: absolute;
+  background: #eb1f48;
+  border-radius: 4px;
+  height: 8px;
+}
+.frills:after, .frills:before {
+  content: "";
+  display: block;
+}
+.frills:before {
+  bottom: 45px;
+}
+.frills:after {
+  top: 45px;
+}
+.left-frills {
+  right: 164px;
+  top: 28.5px;
+}
+.active .left-frills {
+  animation: move-left 0.38s ease-out, width-to-zero 0.38s ease-out;
+}
+.left-frills:before, .left-frills:after {
+  left: 15px;
+}
+.active .left-frills:before {
+  animation: width-to-zero 0.38s ease-out, move-up 0.38s ease-out;
+}
+.active .left-frills:after {
+  animation: width-to-zero 0.38s ease-out, move-down 0.38s ease-out;
+}
+.right-frills {
+  left: 164px;
+  top: 28.5px;
+}
+.active .right-frills {
+  animation: move-right 0.38s ease-out, width-to-zero 0.38s ease-out;
+}
+.right-frills:before, .right-frills:after {
+  right: 15px;
+}
+.active .right-frills:before {
+  animation: width-to-zero 0.38s ease-out, move-up 0.38s ease-out;
+}
+.active .right-frills:after {
+  animation: width-to-zero 0.38s ease-out, move-down 0.38s ease-out;
+}
+.left-frills:before, .right-frills:after {
+  transform: rotate(34deg);
+}
+.left-frills:after, .right-frills:before {
+  transform: rotate(- 34deg);
+}
+@keyframes move-left {
+  0% {
+    transform: none;
+  }
+  65% {
+    transform: translateX(-80px);
+  }
+  100% {
+    transform: translateX(-80px);
+  }
+}
+@keyframes move-right {
+  0% {
+    transform: none;
+  }
+  65% {
+    transform: translateX(80px);
+  }
+  100% {
+    transform: translateX(80px);
+  }
+}
+@keyframes width-to-zero {
+  0% {
+    width: 38px;
+  }
+  100% {
+    width: 8px;
+  }
+}
+@keyframes move-up {
+  100% {
+    bottom: 69.75px;
+  }
+}
+@keyframes move-down {
+  100% {
+    top: 69.75px;
+  }
+}
+
+	
+	</style>
+</head>
+<body >
+<!-- 
+<h1>qj</h1> -->
+
+
+
+
+<!-- Button -->
+<div class="fancy-button" id="fancy">
+		<div class="left-frills frills"></div>
+		<div class="button" id="getNum" >0</div>
+		<div class="right-frills frills"></div>
+	  </div>
+
+
+
+<div style="width: 50%;position:absolute;top:300px;left:50%;transform: translate(-50%);">
+	
+
+<div style="margin-bottom: 20px;">
+	<button id="getting" class="getting" style="padding:10px;font-size: 20px;">번호뽑기</button>
+</div>
+
+<div>뽑은 숫자</div>
+<div id="getedNum" style="word-break: break-all;"></div>
+<!-- <div>남은 숫자</div>
+<div id="lest_num"></div> -->
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script>
+
+$(function() {
+	var cnt=0;
+    var allnum = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '★', '11', '12', '13', '14', '15', '16', '17', '18', '19'];
+	var newnum = [];
+
+	$("#getting").on('click', function() {
+		cnt++;
+
+		if(cnt>'20'){
+			alert("The end");
+			location.reload(true);
+		}
+		var movenum = allnum.splice(Math.floor(Math.random() * allnum.length),1)[0];
+		newnum.push(movenum)
+		$("#getNum").text(movenum);
+		$("#getedNum").text(newnum.join());
+		//$("#lest_num").text(allnum.join());
+	});
+});
+
+ $(".getting").mousedown(function(){
+    $('#fancy').bind('animationend webkitAnimationEnd MSAnimationEnd oAnimationEnd', function(){
+        $('#fancy').removeClass('active');
+    })
+     $('#fancy').addClass("active");
+  });
+</script>
+</body>
+</html>
